@@ -27,11 +27,13 @@ class TreeNode
     end
   end
 
-  def sort
+  def traverse
     sorted = []
-    sorted += @left.sort unless @left.nil?
+    sorted += @left.traverse unless @left.nil?
+    p sorted
     sorted.push(@value)
-    sorted += @right.sort unless @right.nil?
+    sorted += @right.traverse unless @right.nil?
+    p sorted
     return sorted
   end
 end
@@ -40,4 +42,4 @@ array = [7, 4, 9, 1, 6, 14, 10]
 first = array.shift
 root = TreeNode.new(first, nil, nil)
 array.each {|x| root.insert_node(x)}
-p root.sort
+p root.traverse
