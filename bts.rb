@@ -1,3 +1,5 @@
+# require 'rdoc/rdoc'
+
 class TreeNode
   def initialize(value = nil, left = nil, right = nil)
     @value = value
@@ -30,10 +32,8 @@ class TreeNode
   def traverse
     sorted = []
     sorted += @left.traverse unless @left.nil?
-    p sorted
     sorted.push(@value)
     sorted += @right.traverse unless @right.nil?
-    p sorted
     return sorted
   end
 end
@@ -43,3 +43,15 @@ first = array.shift
 root = TreeNode.new(first, nil, nil)
 array.each {|x| root.insert_node(x)}
 p root.traverse
+
+# GC::Profiler.enable
+# GC.start
+# GC::Profiler.report
+#
+# testing larger datasets for time and memory efficiency
+# (1..1000).each {array << rand(999999)}
+# 1.upto(1000) {|x| array << x}
+# 1000.downto(1) {|x| array << x}
+#
+# GC.start
+# GC::Profiler.report
